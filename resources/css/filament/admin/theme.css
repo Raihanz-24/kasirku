@@ -1,0 +1,171 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+@layer base {
+    .dark { color-scheme: dark; }
+    .dark body { background: #071424; color: #e5edf6; }
+    body { background: #edf3f7; color: #102a43; }
+}
+
+@layer components {
+    .fi-body, .fi-main, .fi-layout, .fi-main-ctn { background: #edf3f7; }
+    .fi-sidebar { border-right: 1px solid #2b4158; background: #102a43; }
+    .fi-sidebar-header, .fi-topbar nav { border-color: #2b4158; background: #18354d; box-shadow: 0 8px 24px rgb(15 42 67 / .12); }
+    .fi-sidebar-nav { padding: 32px 8px; }
+    .fi-sidebar-nav-groups { gap: 28px; }
+    .fi-sidebar-group-items { gap: 6px; margin-top: 12px; }
+    .fi-sidebar-group-label { color: #8da2b7; font-size: 11px; font-weight: 800; line-height: 1; text-transform: uppercase; }
+    .fi-sidebar-item-btn { min-height: 44px; gap: 13px; border-radius: 7px; padding: 0 13px; color: #c4d0dc; }
+    .fi-sidebar-item-label { font-size: 14px; font-weight: 650; letter-spacing: 0; }
+    .fi-sidebar-item-icon { color: #91a6b9; }
+    .fi-sidebar-item.fi-active .fi-sidebar-item-btn { border: 1px solid #9b824b; border-left: 4px solid #f4bf4f; background: #2a3f4d; color: #f8d77b; padding-left: 10px; }
+    .fi-sidebar-item.fi-active .fi-sidebar-item-icon { color: #f6d477; }
+    .fi-topbar { color: #f8fafc; }
+    .fi-header-heading { color: #102a43; font-size: 30px; letter-spacing: 0; }
+    .fi-section, .fi-wi-chart, .fi-ta-ctn { border-color: #c9d6e2; background: #f9fbfc; box-shadow: 0 12px 28px rgb(15 42 67 / .08); }
+    .fi-wi-chart {
+        border-color: #263f56 !important;
+        background: #0d2035 !important;
+        color: #e5edf6 !important;
+        box-shadow: 0 12px 28px rgb(15 42 67 / .16) !important;
+    }
+    .fi-wi-chart .fi-wi-chart-heading { color: #f8fafc !important; }
+    .fi-wi-chart .fi-wi-chart-description { color: #9fb2c5 !important; }
+    .fi-wi-chart > .fi-section,
+    .fi-wi-chart .fi-section-header,
+    .fi-wi-chart .fi-section-content-ctn,
+    .fi-wi-chart .fi-section-content {
+        border-color: #263f56 !important;
+        background-color: #0d2035 !important;
+        background-image: none !important;
+    }
+    .fi-wi-chart .fi-section-header-heading,
+    .fi-wi-chart .fi-section-heading {
+        color: #f8fafc !important;
+    }
+    .dark .fi-body, .dark .fi-main, .dark .fi-layout, .dark .fi-main-ctn { background: #071424; }
+    .dark .fi-sidebar { border-right: 1px solid #26374b; background: #0a1a2d; }
+    .dark .fi-sidebar-header, .dark .fi-topbar nav { border-color: #26374b; background: #081729; box-shadow: none; }
+    .dark .fi-sidebar-nav-groups { gap: 28px; }
+    .dark .fi-sidebar-group-label { color: #71849c; font-size: 11px; font-weight: 800; text-transform: uppercase; }
+    .dark .fi-sidebar-item-btn { color: #afbdcd; }
+    .dark .fi-sidebar-item.fi-active .fi-sidebar-item-btn { border: 1px solid #806d43; border-left: 4px solid #fbbf24; background: #263a48; color: #f8cf67; }
+    .dark .fi-sidebar-item.fi-active .fi-sidebar-item-icon { color: #f8cf67; }
+    .dark .fi-section, .dark .fi-wi-chart, .dark .fi-ta-ctn, .dark .fi-fo-field-wrp input, .dark .fi-fo-field-wrp textarea, .dark .fi-select-input { border-color: #26374b; background: #0d2035; box-shadow: none; }
+    .dark .fi-header-heading { color: #f8fafc; font-size: 30px; letter-spacing: 0; }
+    .dark .fi-wi-chart canvas { min-height: 280px; }
+
+    .dark .fi-section,
+    .dark .fi-section-header,
+    .dark .fi-section-content-ctn,
+    .dark .fi-section-content,
+    .dark .fi-ta,
+    .dark .fi-ta-ctn,
+    .dark .fi-ta-header,
+    .dark .fi-ta-content,
+    .dark .fi-modal-window,
+    .dark .fi-dropdown-panel {
+        border-color: #263f56 !important;
+        background-color: #0d2035 !important;
+        background-image: none !important;
+        box-shadow: none !important;
+    }
+
+    .dark .fi-ta-table,
+    .dark .fi-ta-table tbody,
+    .dark .fi-ta-row,
+    .dark .fi-ta-row > td {
+        border-color: #26374b !important;
+        background-color: #0d2035 !important;
+    }
+
+    .dark .fi-ta-table thead,
+    .dark .fi-ta-table thead tr,
+    .dark .fi-ta-table thead th {
+        border-color: #30475f !important;
+        background-color: #102a43 !important;
+    }
+
+    .dark .fi-ta-row:hover > td {
+        background-color: #132a42 !important;
+    }
+
+    .dark .fi-input-wrp,
+    .dark .fi-fo-field-wrp input,
+    .dark .fi-fo-field-wrp textarea,
+    .dark .fi-select-input {
+        border-color: #30475f !important;
+        background-color: #0a1a2d !important;
+    }
+
+    .dark .withdrawal-card,
+    .dark .withdrawal-panel,
+    .dark .report-card,
+    .dark .balance-card,
+    .dark .movement-card,
+    .dark .pos-cart-item,
+    .dark .pos-results,
+    .dark .pos-scanner-panel,
+    .dark .report-table-wrap,
+    .dark .balance-table-wrap,
+    .dark .movement-table-wrap {
+        border-color: #263f56 !important;
+        background-color: #0d2035 !important;
+        background-image: none !important;
+    }
+
+    .dark .report-table th,
+    .dark .balance-table th,
+    .dark .movement-table th {
+        border-color: #30475f !important;
+        background-color: #102a43 !important;
+    }
+
+    .dark .report-table td,
+    .dark .balance-table td,
+    .dark .movement-table td {
+        border-color: #26374b !important;
+        background-color: #0d2035 !important;
+    }
+
+    /* Keep sidebar labels readable above Filament's generated primary colors. */
+    .fi-sidebar .fi-sidebar-group-label {
+        color: #9fb2c5 !important;
+        opacity: 1 !important;
+    }
+
+    .fi-sidebar .fi-sidebar-group-collapse-button {
+        color: #9fb2c5 !important;
+    }
+
+    .fi-sidebar .fi-sidebar-item:not(.fi-active) > .fi-sidebar-item-btn {
+        background: transparent !important;
+        color: #d4dee8 !important;
+    }
+
+    .fi-sidebar .fi-sidebar-item:not(.fi-active) > .fi-sidebar-item-btn .fi-sidebar-item-label {
+        color: #d4dee8 !important;
+        opacity: 1 !important;
+    }
+
+    .fi-sidebar .fi-sidebar-item:not(.fi-active) > .fi-sidebar-item-btn .fi-sidebar-item-icon {
+        color: #9fb2c5 !important;
+        opacity: 1 !important;
+    }
+
+    .fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+        border: 1px solid #9b824b !important;
+        border-left: 4px solid #f4bf4f !important;
+        background: #2a3f4d !important;
+        color: #f8d77b !important;
+        box-shadow: none !important;
+    }
+
+    .fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-label,
+    .fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-icon {
+        color: #f8d77b !important;
+        opacity: 1 !important;
+    }
+}
