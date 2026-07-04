@@ -447,9 +447,17 @@
                     stream: null,
                     detector: null,
                     frameId: null,
+                    lastCode: null,
+                    emptyFrames: 0,
+                    processing: false,
+                    scannerMessage: 'Arahkan barcode ke kotak hijau.',
 
                     async openScanner() {
                         this.error = '';
+                        this.lastCode = null;
+                        this.emptyFrames = 0;
+                        this.processing = false;
+                        this.scannerMessage = 'Arahkan barcode ke kotak hijau.';
 
                         if (!window.isSecureContext) {
                             this.error = 'Kamera membutuhkan HTTPS atau localhost. Buka aplikasi lewat koneksi aman untuk memakai scanner.';
@@ -515,17 +523,35 @@
 
                             if (barcodes.length > 0) {
                                 const code = barcodes[0].rawValue;
-                                this.closeScanner();
-                                await livewire.set('barcode', code);
-                                await livewire.addByBarcode();
+                                this.emptyFrames = 0;
 
-                                return;
+                                if (!this.processing && code !== this.lastCode) {
+                                    this.processing = true;
+                                    this.lastCode = code;
+                                    this.scannerMessage = `Memproses barcode ${code}...`;
+
+                                    await livewire.set('barcode', code);
+                                    await livewire.addByBarcode();
+
+                                    this.scannerMessage = 'Berhasil dipindai. Arahkan ke barcode berikutnya.';
+                                    this.processing = false;
+                                }
+                            } else {
+                                this.emptyFrames++;
+
+                                if (this.emptyFrames >= 8) {
+                                    this.lastCode = null;
+                                    this.emptyFrames = 0;
+                                }
                             }
                         } catch (error) {
-                            this.error = 'Barcode belum terbaca. Arahkan kamera lebih dekat dan pastikan label terang.';
+                            this.processing = false;
+                            this.scannerMessage = 'Barcode belum terbaca. Arahkan kamera lebih dekat dan pastikan label terang.';
                         }
 
-                        this.frameId = requestAnimationFrame(() => this.scanFrame());
+                        if (this.scanning) {
+                            this.frameId = requestAnimationFrame(() => this.scanFrame());
+                        }
                     },
 
                     closeScanner() {
@@ -547,6 +573,9 @@
                         }
 
                         this.detector = null;
+                        this.processing = false;
+                        this.lastCode = null;
+                        this.emptyFrames = 0;
 
                         this.$nextTick(() => this.$refs.barcodeInput?.focus());
                     },
@@ -789,8 +818,8 @@
                     <div class="pos-scanner-guide"></div>
                 </div>
 
-                <div class="pos-scanner-message">
-                    Arahkan barcode ke kotak hijau. Produk akan otomatis masuk saat barcode terbaca.
+                <div class="pos-scanner-message" x-text="scannerMessage">
+                    Arahkan barcode ke kotak hijau.
                 </div>
 
                 <div class="pos-scanner-footer">
