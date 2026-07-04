@@ -105,6 +105,13 @@
                 padding: 12px 16px 16px;
             }
 
+            .pos-scanner-footer {
+                display: flex;
+                justify-content: flex-end;
+                border-top: 1px solid rgb(229 231 235);
+                padding: 12px 16px;
+            }
+
             .pos-combobox {
                 position: relative;
                 min-width: 0;
@@ -533,6 +540,15 @@
                             this.stream.getTracks().forEach((track) => track.stop());
                             this.stream = null;
                         }
+
+                        if (this.$refs.scannerVideo) {
+                            this.$refs.scannerVideo.pause();
+                            this.$refs.scannerVideo.srcObject = null;
+                        }
+
+                        this.detector = null;
+
+                        this.$nextTick(() => this.$refs.barcodeInput?.focus());
                     },
                 }));
             });
@@ -543,6 +559,8 @@
         class="pos-page"
         x-data="posBarcodeScanner($wire)"
         x-on:keydown.escape.window="closeScanner()"
+        x-on:livewire:navigating.window="closeScanner()"
+        x-init="$nextTick(() => $refs.barcodeInput?.focus())"
     >
         <div class="pos-main">
             <x-filament::section>
@@ -555,6 +573,7 @@
                     <div class="pos-input-row">
                         <x-filament::input.wrapper>
                             <x-filament::input
+                                x-ref="barcodeInput"
                                 type="text"
                                 wire:model="barcode"
                                 wire:keydown.enter.prevent="addByBarcode"
@@ -569,7 +588,10 @@
                                     type="button"
                                     color="gray"
                                     icon="heroicon-o-camera"
-                                    x-on:click="openScanner()"
+                                    tabindex="-1"
+                                    x-on:click="if ($event.detail > 0) openScanner()"
+                                    x-on:keydown.enter.stop.prevent
+                                    x-on:keydown.space.stop.prevent
                                 >
                                     Kamera
                                 </x-filament::button>
@@ -744,6 +766,7 @@
             x-show="scanning"
             x-transition.opacity
             x-cloak
+            x-on:click.self="closeScanner()"
         >
             <div class="pos-scanner-panel" x-on:click.stop>
                 <div class="pos-scanner-head">
@@ -752,7 +775,7 @@
                         type="button"
                         icon="heroicon-o-x-mark"
                         color="gray"
-                        x-on:click="closeScanner()"
+                        x-on:click.stop.prevent="closeScanner()"
                     />
                 </div>
 
@@ -768,6 +791,17 @@
 
                 <div class="pos-scanner-message">
                     Arahkan barcode ke kotak hijau. Produk akan otomatis masuk saat barcode terbaca.
+                </div>
+
+                <div class="pos-scanner-footer">
+                    <x-filament::button
+                        type="button"
+                        color="gray"
+                        icon="heroicon-o-x-mark"
+                        x-on:click.stop.prevent="closeScanner()"
+                    >
+                        Tutup Kamera
+                    </x-filament::button>
                 </div>
             </div>
         </div>
