@@ -17,6 +17,7 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
@@ -60,6 +61,10 @@ class AdminPanelProvider extends PanelProvider
                         }
                     </script>
                     HTML),
+            )
+            ->renderHook(
+                PanelsRenderHook::SCRIPTS_AFTER,
+                fn (): HtmlString => new HtmlString(Blade::render("@vite('resources/js/product-barcode-camera.js')")),
             )
             ->navigationGroups([
                 'Keuangan',
