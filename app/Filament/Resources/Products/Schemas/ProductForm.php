@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Products\Schemas;
 
 use App\Models\Product;
+use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -35,7 +36,18 @@ class ProductForm
                             ->label('Barcode')
                             ->placeholder('Scan atau isi manual')
                             ->unique(ignoreRecord: true)
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->suffixAction(
+                                Action::make('scanBarcodeCamera')
+                                    ->label('Scan dengan kamera')
+                                    ->icon('heroicon-o-camera')
+                                    ->color('gray')
+                                    ->modalHeading('Scan Barcode Produk')
+                                    ->modalDescription('Arahkan kamera ke barcode. Nilai akan otomatis masuk ke field barcode.')
+                                    ->modalContent(view('filament.components.product-barcode-camera'))
+                                    ->modalSubmitAction(false)
+                                    ->modalCancelActionLabel('Tutup Kamera'),
+                            ),
                         Select::make('category_id')
                             ->label('Kategori')
                             ->relationship(

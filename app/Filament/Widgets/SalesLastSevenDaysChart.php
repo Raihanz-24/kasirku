@@ -68,18 +68,13 @@ class SalesLastSevenDaysChart extends ChartWidget
                 scales: {
                     y: {
                         beginAtZero: true,
-                        grid: { color: 'rgba(148, 163, 184, 0.14)' },
-                        border: { color: 'rgba(148, 163, 184, 0.22)' },
                         ticks: {
-                            color: '#9fb2c5',
                             precision: 0,
                             callback: (value) => 'Rp ' + new Intl.NumberFormat('id-ID', { notation: 'compact' }).format(value),
                         },
                     },
                     x: {
                         grid: { display: false },
-                        border: { color: 'rgba(148, 163, 184, 0.22)' },
-                        ticks: { color: '#9fb2c5' },
                     },
                 },
             }

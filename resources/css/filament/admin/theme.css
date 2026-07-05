@@ -26,24 +26,24 @@
     .fi-header-heading { color: #102a43; font-size: 30px; letter-spacing: 0; }
     .fi-section, .fi-wi-chart, .fi-ta-ctn { border-color: #c9d6e2; background: #f9fbfc; box-shadow: 0 12px 28px rgb(15 42 67 / .08); }
     .fi-wi-chart {
-        border-color: #263f56 !important;
-        background: #0d2035 !important;
-        color: #e5edf6 !important;
-        box-shadow: 0 12px 28px rgb(15 42 67 / .16) !important;
+        border-color: #c9d6e2 !important;
+        background: #fff !important;
+        color: #102a43 !important;
+        box-shadow: 0 12px 28px rgb(15 42 67 / .08) !important;
     }
-    .fi-wi-chart .fi-wi-chart-heading { color: #f8fafc !important; }
-    .fi-wi-chart .fi-wi-chart-description { color: #9fb2c5 !important; }
+    .fi-wi-chart .fi-wi-chart-heading { color: #102a43 !important; }
+    .fi-wi-chart .fi-wi-chart-description { color: #667c91 !important; }
     .fi-wi-chart > .fi-section,
     .fi-wi-chart .fi-section-header,
     .fi-wi-chart .fi-section-content-ctn,
     .fi-wi-chart .fi-section-content {
-        border-color: #263f56 !important;
-        background-color: #0d2035 !important;
+        border-color: #c9d6e2 !important;
+        background-color: #fff !important;
         background-image: none !important;
     }
     .fi-wi-chart .fi-section-header-heading,
     .fi-wi-chart .fi-section-heading {
-        color: #f8fafc !important;
+        color: #102a43 !important;
     }
     .dark .fi-body, .dark .fi-main, .dark .fi-layout, .dark .fi-main-ctn { background: #071424; }
     .dark .fi-sidebar { border-right: 1px solid #26374b; background: #0a1a2d; }
@@ -56,6 +56,22 @@
     .dark .fi-section, .dark .fi-wi-chart, .dark .fi-ta-ctn, .dark .fi-fo-field-wrp input, .dark .fi-fo-field-wrp textarea, .dark .fi-select-input { border-color: #26374b; background: #0d2035; box-shadow: none; }
     .dark .fi-header-heading { color: #f8fafc; font-size: 30px; letter-spacing: 0; }
     .dark .fi-wi-chart canvas { min-height: 280px; }
+    .dark .fi-wi-chart,
+    .dark .fi-wi-chart > .fi-section,
+    .dark .fi-wi-chart .fi-section-header,
+    .dark .fi-wi-chart .fi-section-content-ctn,
+    .dark .fi-wi-chart .fi-section-content {
+        border-color: #263f56 !important;
+        background-color: #0d2035 !important;
+        color: #e5edf6 !important;
+        box-shadow: none !important;
+    }
+    .dark .fi-wi-chart .fi-wi-chart-heading,
+    .dark .fi-wi-chart .fi-section-header-heading,
+    .dark .fi-wi-chart .fi-section-heading {
+        color: #f8fafc !important;
+    }
+    .dark .fi-wi-chart .fi-wi-chart-description { color: #9fb2c5 !important; }
 
     .dark .fi-section,
     .dark .fi-section-header,
@@ -167,5 +183,189 @@
     .fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-icon {
         color: #f8d77b !important;
         opacity: 1 !important;
+    }
+
+    html:not(.dark) .fi-section,
+    html:not(.dark) .fi-ta-ctn,
+    html:not(.dark) .withdrawal-card,
+    html:not(.dark) .withdrawal-panel,
+    html:not(.dark) .balance-card,
+    html:not(.dark) .movement-card,
+    html:not(.dark) .report-card,
+    html:not(.dark) .pos-cart-item,
+    html:not(.dark) .pos-total-box {
+        border-color: #d3dee7 !important;
+        background-color: #fff !important;
+        background-image: none !important;
+        color: #102a43 !important;
+        box-shadow: 0 10px 24px rgb(15 42 67 / .07) !important;
+    }
+
+    html:not(.dark) .balance-card,
+    html:not(.dark) .movement-card,
+    html:not(.dark) .report-card,
+    html:not(.dark) .withdrawal-card {
+        border-top: 2px solid rgb(225 172 62 / .72) !important;
+    }
+
+    html:not(.dark) .balance-card.main {
+        border-color: #d3dee7 !important;
+        border-left: 4px solid #f4bf4f !important;
+        background: linear-gradient(105deg, #fff 0%, #fffaf0 100%) !important;
+    }
+
+    html:not(.dark) .movement-card.profit,
+    html:not(.dark) .withdrawal-card.preview {
+        border-color: #a7dbc7 !important;
+        border-top-color: #34b487 !important;
+        background: #f2fbf7 !important;
+    }
+
+    html:not(.dark) .balance-label,
+    html:not(.dark) .movement-label,
+    html:not(.dark) .report-card span,
+    html:not(.dark) .withdrawal-card span,
+    html:not(.dark) .withdrawal-panel__header p,
+    html:not(.dark) .report-muted,
+    html:not(.dark) .withdrawal-note {
+        color: #667c91 !important;
+    }
+
+    html:not(.dark) .balance-value,
+    html:not(.dark) .movement-value,
+    html:not(.dark) .report-card strong,
+    html:not(.dark) .withdrawal-card strong,
+    html:not(.dark) .withdrawal-panel__header h2,
+    html:not(.dark) .pos-heading,
+    html:not(.dark) .pos-product-name,
+    html:not(.dark) .pos-subtotal,
+    html:not(.dark) .pos-total-value {
+        color: #102a43 !important;
+    }
+
+    html:not(.dark) .balance-table-wrap,
+    html:not(.dark) .movement-table-wrap,
+    html:not(.dark) .report-table-wrap,
+    html:not(.dark) .withdrawal-table-wrap {
+        border-color: #d3dee7 !important;
+        background: #fff !important;
+        box-shadow: 0 8px 22px rgb(15 42 67 / .06) !important;
+    }
+
+    html:not(.dark) .balance-table th,
+    html:not(.dark) .movement-table th,
+    html:not(.dark) .report-table th,
+    html:not(.dark) .withdrawal-table th,
+    html:not(.dark) .fi-ta-table thead,
+    html:not(.dark) .fi-ta-table thead tr,
+    html:not(.dark) .fi-ta-table thead th {
+        border-color: #d3dee7 !important;
+        background: #f2f6f9 !important;
+        color: #536f87 !important;
+    }
+
+    html:not(.dark) .balance-table td,
+    html:not(.dark) .movement-table td,
+    html:not(.dark) .report-table td,
+    html:not(.dark) .withdrawal-table td,
+    html:not(.dark) .fi-ta-row > td {
+        border-color: #e1e8ee !important;
+        background: #fff !important;
+        color: #243b53 !important;
+    }
+
+    html:not(.dark) .fi-ta-row:hover > td {
+        background: #f7fafc !important;
+    }
+
+    html:not(.dark) .fi-main-ctn .fi-input-wrp,
+    html:not(.dark) .fi-main-ctn .fi-fo-field-wrp input,
+    html:not(.dark) .fi-main-ctn .fi-fo-field-wrp textarea,
+    html:not(.dark) .fi-main-ctn .fi-select-input,
+    html:not(.dark) .fi-main-ctn .pos-qty-input,
+    html:not(.dark) .fi-main-ctn .pos-notes {
+        border-color: #c9d6e2 !important;
+        background: #fff !important;
+        color: #102a43 !important;
+        box-shadow: none !important;
+    }
+
+    html:not(.dark) .pos-page .fi-section {
+        border: 1px solid #afbfcd !important;
+        background: #fff !important;
+        box-shadow: 0 8px 20px rgb(15 42 67 / .07) !important;
+    }
+
+    html:not(.dark) .pos-page .fi-input-wrp,
+    html:not(.dark) .pos-page .pos-qty-input,
+    html:not(.dark) .pos-page .pos-notes {
+        border: 1px solid #91a6b9 !important;
+        background: #fff !important;
+    }
+
+    html:not(.dark) .pos-page .pos-heading,
+    html:not(.dark) .pos-page .pos-product-name,
+    html:not(.dark) .pos-page .pos-empty-title,
+    html:not(.dark) .pos-page .pos-total-value,
+    html:not(.dark) .pos-page .pos-subtotal {
+        color: #102a43 !important;
+    }
+
+    html:not(.dark) .pos-page .pos-muted,
+    html:not(.dark) .pos-page .pos-product-price,
+    html:not(.dark) .pos-page .pos-total-meta,
+    html:not(.dark) .pos-page .pos-empty-text,
+    html:not(.dark) .pos-page .pos-result-meta {
+        color: #536f87 !important;
+        opacity: 1 !important;
+    }
+
+    html:not(.dark) .pos-page .pos-empty {
+        border: 1px dashed #91a6b9 !important;
+        background: #f7fafc !important;
+    }
+
+    html:not(.dark) .pos-page .pos-cart-item,
+    html:not(.dark) .pos-page .pos-total-box {
+        border: 1px solid #afbfcd !important;
+    }
+
+    .dark .pos-page .fi-section {
+        border: 1px solid #3d5872 !important;
+        background: #0d2035 !important;
+    }
+
+    .dark .pos-page .fi-input-wrp,
+    .dark .pos-page .pos-qty-input,
+    .dark .pos-page .pos-notes {
+        border: 1px solid #49657e !important;
+        background: #071a2d !important;
+    }
+
+    .dark .pos-page .pos-heading,
+    .dark .pos-page .pos-product-name,
+    .dark .pos-page .pos-empty-title,
+    .dark .pos-page .pos-total-value,
+    .dark .pos-page .pos-subtotal {
+        color: #f1f5f9 !important;
+    }
+
+    .dark .pos-page .pos-muted,
+    .dark .pos-page .pos-product-price,
+    .dark .pos-page .pos-total-meta,
+    .dark .pos-page .pos-empty-text,
+    .dark .pos-page .pos-result-meta {
+        color: #afbdcd !important;
+        opacity: 1 !important;
+    }
+
+    .dark .pos-page .pos-empty {
+        border: 1px dashed #49657e !important;
+        background: #0a1a2d !important;
+    }
+
+    .dark .pos-page .pos-cart-item,
+    .dark .pos-page .pos-total-box {
+        border: 1px solid #3d5872 !important;
     }
 }
