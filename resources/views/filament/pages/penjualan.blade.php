@@ -465,12 +465,6 @@
                             return;
                         }
 
-                        if (!('BarcodeDetector' in window)) {
-                            this.error = 'Browser ini belum mendukung scan barcode dari kamera. Gunakan Chrome/Edge terbaru atau input barcode manual.';
-
-                            return;
-                        }
-
                         if (!navigator.mediaDevices?.getUserMedia) {
                             this.error = 'Kamera tidak tersedia di browser ini.';
 
@@ -493,7 +487,6 @@
                                     'qr_code',
                                 ];
 
-                                this.detector = new BarcodeDetector({ formats });
                                 this.stream = await navigator.mediaDevices.getUserMedia({
                                     video: {
                                         facingMode: { ideal: 'environment' },
@@ -505,12 +498,40 @@
 
                                 this.$refs.scannerVideo.srcObject = this.stream;
                                 await this.$refs.scannerVideo.play();
+
+                                if (!('BarcodeDetector' in window)) {
+                                    this.scannerMessage = 'Kamera sudah terbuka, tapi browser ini belum mendukung pembaca barcode otomatis. Gunakan Chrome/Edge terbaru atau ketik barcode manual.';
+
+                                    return;
+                                }
+
+                                this.detector = new BarcodeDetector({ formats });
                                 this.scanFrame();
                             } catch (error) {
-                                this.error = 'Kamera tidak bisa dibuka. Pastikan izin kamera diberikan.';
+                                this.error = this.cameraErrorMessage(error);
                                 this.closeScanner();
                             }
                         });
+                    },
+
+                    cameraErrorMessage(error) {
+                        if (error?.name === 'NotAllowedError') {
+                            return 'Izin kamera ditolak. Buka pengaturan situs di browser lalu izinkan kamera.';
+                        }
+
+                        if (error?.name === 'NotFoundError') {
+                            return 'Kamera tidak ditemukan pada perangkat ini.';
+                        }
+
+                        if (error?.name === 'NotReadableError') {
+                            return 'Kamera sedang dipakai aplikasi lain. Tutup aplikasi kamera/WhatsApp lalu coba lagi.';
+                        }
+
+                        if (error?.name === 'OverconstrainedError') {
+                            return 'Kamera belakang tidak tersedia. Coba buka ulang scanner atau gunakan input barcode manual.';
+                        }
+
+                        return 'Kamera tidak bisa dibuka. Pastikan izin kamera diberikan.';
                     },
 
                     async scanFrame() {
@@ -618,7 +639,7 @@
                                     color="gray"
                                     icon="heroicon-o-camera"
                                     tabindex="-1"
-                                    x-on:click="if ($event.detail > 0) openScanner()"
+                                    x-on:click.stop.prevent="openScanner()"
                                     x-on:keydown.enter.stop.prevent
                                     x-on:keydown.space.stop.prevent
                                 >

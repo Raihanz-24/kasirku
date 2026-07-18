@@ -12,15 +12,12 @@ window.productBarcodeCamera = (livewire) => ({
             return;
         }
 
-        if (!('BarcodeDetector' in window) || !navigator.mediaDevices?.getUserMedia) {
-            this.fail('Browser belum mendukung scanner kamera. Gunakan Chrome atau Edge terbaru.');
+        if (!navigator.mediaDevices?.getUserMedia) {
+            this.fail('Kamera tidak tersedia di browser ini.');
             return;
         }
 
         try {
-            this.detector = new BarcodeDetector({
-                formats: ['ean_13', 'ean_8', 'upc_a', 'upc_e', 'code_128', 'code_39', 'code_93', 'itf', 'qr_code'],
-            });
             this.stream = await navigator.mediaDevices.getUserMedia({
                 video: {
                     facingMode: { ideal: 'environment' },
@@ -39,6 +36,16 @@ window.productBarcodeCamera = (livewire) => ({
             }
 
             await this.$refs.video.play();
+
+            if (!('BarcodeDetector' in window)) {
+                this.state = 'error';
+                this.message = 'Kamera sudah terbuka, tapi browser ini belum mendukung pembaca barcode otomatis. Gunakan Chrome/Edge terbaru atau isi barcode manual.';
+                return;
+            }
+
+            this.detector = new BarcodeDetector({
+                formats: ['ean_13', 'ean_8', 'upc_a', 'upc_e', 'code_128', 'code_39', 'code_93', 'itf', 'qr_code'],
+            });
             this.scanning = true;
             this.state = 'scanning';
             this.message = 'Arahkan barcode ke dalam kotak hijau.';
@@ -74,6 +81,7 @@ window.productBarcodeCamera = (livewire) => ({
         if (error?.name === 'NotAllowedError') return 'Izin kamera ditolak. Izinkan kamera melalui pengaturan situs browser.';
         if (error?.name === 'NotFoundError') return 'Kamera tidak ditemukan pada perangkat ini.';
         if (error?.name === 'NotReadableError') return 'Kamera sedang digunakan aplikasi lain. Tutup aplikasi tersebut lalu coba lagi.';
+        if (error?.name === 'OverconstrainedError') return 'Kamera belakang tidak tersedia. Coba buka ulang scanner atau isi barcode manual.';
 
         return 'Kamera tidak dapat dibuka. Muat ulang halaman lalu coba kembali.';
     },
