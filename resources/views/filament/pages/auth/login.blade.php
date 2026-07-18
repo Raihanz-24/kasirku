@@ -22,9 +22,20 @@
         .kasirku-form-head h2 { color: #f8fafc; font-size: 27px; font-weight: 780; letter-spacing: 0; } .kasirku-form-head p { margin-top: 8px; color: #9fb2c5; font-size: 13px; line-height: 1.55; }
         .kasirku-form-body { margin-top: 30px; }
         .kasirku-form .fi-input-wrp { border-color: #30475f !important; background: #071424 !important; box-shadow: none !important; }
-        .kasirku-form .fi-input { color: #e5edf6 !important; }
+        .kasirku-form .fi-input, .kasirku-form input, .kasirku-form input[type="text"], .kasirku-form input[type="password"], .kasirku-form input[type="email"] { color: #e5edf6 !important; -webkit-text-fill-color: #e5edf6 !important; caret-color: #f4bf4f; }
+        .kasirku-form input:-webkit-autofill, .kasirku-form input:-webkit-autofill:hover, .kasirku-form input:-webkit-autofill:focus { -webkit-box-shadow: 0 0 0 1000px #071424 inset !important; -webkit-text-fill-color: #e5edf6 !important; caret-color: #f4bf4f; }
         .kasirku-form .fi-input::placeholder { color: #71849c !important; }
-        .kasirku-form .fi-fo-field-wrp-label, .kasirku-form .fi-fo-field-wrp-label span, .kasirku-form .fi-checkbox-label { color: #cbd7e2 !important; opacity: 1 !important; }
+        .kasirku-form .fi-fo-field-wrp-label,
+        .kasirku-form .fi-fo-field-wrp-label *,
+        .kasirku-form .fi-fo-field-wrp-label span,
+        .kasirku-form label,
+        .kasirku-form label *,
+        .kasirku-form .fi-checkbox-label,
+        .kasirku-form .fi-checkbox-label * {
+            color: #fff !important;
+            opacity: 1 !important;
+        }
+        .kasirku-form .fi-fo-field-wrp-error-message, .kasirku-form .fi-fo-field-wrp-hint { opacity: 1 !important; }
         .kasirku-form .fi-checkbox-input { border-color: #4b6278 !important; background: #071424 !important; }
         .kasirku-form .fi-ac-btn-action { min-height: 44px; border-radius: 7px; background: #f4bf4f !important; color: #102a43 !important; box-shadow: none !important; }
         .kasirku-form .fi-ac-btn-action svg { color: #102a43 !important; }
