@@ -31,6 +31,14 @@
                 line-height: 1.4;
             }
 
+            .pos-barcode-message {
+                margin: 6px 0 0;
+                color: rgb(220 38 38);
+                font-size: 13px;
+                font-weight: 650;
+                line-height: 1.4;
+            }
+
             .pos-input-row {
                 display: grid;
                 gap: 10px;
@@ -389,6 +397,10 @@
                     color: rgb(156 163 175);
                 }
 
+                .pos-barcode-message {
+                    color: rgb(252 165 165);
+                }
+
                 .pos-count,
                 .pos-total-box {
                     background: rgb(255 255 255 / 0.06);
@@ -621,16 +633,22 @@
                     </div>
 
                     <div class="pos-input-row">
-                        <x-filament::input.wrapper>
-                            <x-filament::input
-                                x-ref="barcodeInput"
-                                type="text"
-                                wire:model="barcode"
-                                wire:keydown.enter.prevent="addByBarcode"
-                                placeholder="Scan barcode atau ketik SKU"
-                                autofocus
-                            />
-                        </x-filament::input.wrapper>
+                        <div>
+                            <x-filament::input.wrapper>
+                                <x-filament::input
+                                    x-ref="barcodeInput"
+                                    type="text"
+                                    wire:model="barcode"
+                                    wire:keydown.enter.prevent="addByBarcode"
+                                    placeholder="Scan barcode atau ketik SKU"
+                                    autofocus
+                                />
+                            </x-filament::input.wrapper>
+
+                            @if ($barcodeMessage)
+                                <p class="pos-barcode-message">{{ $barcodeMessage }}</p>
+                            @endif
+                        </div>
 
                         <div class="pos-barcode-actions">
                             <div class="pos-mobile-only">

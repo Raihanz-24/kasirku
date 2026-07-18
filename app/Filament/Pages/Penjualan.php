@@ -25,6 +25,8 @@ class Penjualan extends Page
 
     public ?string $barcode = null;
 
+    public ?string $barcodeMessage = null;
+
     public ?string $manualProductSearch = null;
 
     public ?int $manualProductId = null;
@@ -51,6 +53,8 @@ class Penjualan extends Page
 
     public function addByBarcode(): void
     {
+        $this->barcodeMessage = null;
+
         $code = trim((string) $this->barcode);
 
         if ($code === '') {
@@ -63,6 +67,8 @@ class Penjualan extends Page
             ->first();
 
         if (! $product) {
+            $this->barcodeMessage = 'Barang tidak terdaftar.';
+
             Notification::make()
                 ->title('Produk tidak ditemukan')
                 ->body('Barcode atau SKU tidak cocok dengan produk mana pun.')
@@ -76,6 +82,12 @@ class Penjualan extends Page
 
         $this->addProductToCart($product);
         $this->barcode = null;
+        $this->barcodeMessage = null;
+    }
+
+    public function updatedBarcode(): void
+    {
+        $this->barcodeMessage = null;
     }
 
     public function addManualProduct(): void
