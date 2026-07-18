@@ -459,6 +459,7 @@
                     stream: null,
                     detector: null,
                     frameId: null,
+                    restartTimer: null,
                     lastCode: null,
                     emptyFrames: 0,
                     processing: false,
@@ -470,6 +471,11 @@
                         this.emptyFrames = 0;
                         this.processing = false;
                         this.scannerMessage = 'Arahkan barcode ke kotak hijau.';
+
+                        if (this.restartTimer) {
+                            clearTimeout(this.restartTimer);
+                            this.restartTimer = null;
+                        }
 
                         if (!window.isSecureContext) {
                             this.error = 'Kamera membutuhkan HTTPS atau localhost. Buka aplikasi lewat koneksi aman untuk memakai scanner.';
@@ -566,8 +572,10 @@
                                     await livewire.set('barcode', code);
                                     await livewire.addByBarcode();
 
-                                    this.scannerMessage = 'Berhasil dipindai. Arahkan ke barcode berikutnya.';
                                     this.processing = false;
+                                    this.restartScanner();
+
+                                    return;
                                 }
                             } else {
                                 this.emptyFrames++;
@@ -587,8 +595,22 @@
                         }
                     },
 
-                    closeScanner() {
+                    restartScanner() {
+                        this.closeScanner(false);
+
+                        this.restartTimer = setTimeout(() => {
+                            this.restartTimer = null;
+                            this.openScanner();
+                        }, 700);
+                    },
+
+                    closeScanner(refocus = true) {
                         this.scanning = false;
+
+                        if (this.restartTimer) {
+                            clearTimeout(this.restartTimer);
+                            this.restartTimer = null;
+                        }
 
                         if (this.frameId) {
                             cancelAnimationFrame(this.frameId);
@@ -610,7 +632,9 @@
                         this.lastCode = null;
                         this.emptyFrames = 0;
 
-                        this.$nextTick(() => this.$refs.barcodeInput?.focus());
+                        if (refocus) {
+                            this.$nextTick(() => this.$refs.barcodeInput?.focus());
+                        }
                     },
                 }));
             });
